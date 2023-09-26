@@ -1105,25 +1105,19 @@ arenaSelection()
 	self [[ level.gtd_call ]]("allowSpectateTeam", "freelook", true);
 	self [[ level.gtd_call ]]("allowSpectateTeam", "none", false);
 
-	arena = 0;
-	scrollStartFire = false;
-	scrollStartMelee = false;
 	for (;;)
 	{
-		wait .05;
 		if (self attackButtonPressed())
 		{
-			scrollStartFire = true;
+			arena = 0;
+			break;
 		}
 		else if (self meleeButtonPressed())
 		{
-			scrollStartMelee = true;
 			arena = 11;
-		}
-		if (scrollStartFire == true || scrollStartMelee == true)
-		{
 			break;
 		}
+		wait .05;
 	}
 
 	self.vote_indicator setShader("white", 254, 17);
@@ -1136,7 +1130,7 @@ arenaSelection()
 
 			if (level.arenaFree[arena-1] < 0)
 			{
-				println("####### arenaSelection: arenaFree is fewer than 0");
+				codam\utils::_debug("####### arenaSelection: arenaFree is fewer than 0");
 				level.arenaFree[arena-1] = 0;
 			}
 			self.arena = arena-1;
@@ -1179,11 +1173,6 @@ arenaSelection()
 				}
 				self.health = 100;
 				self.opponent.health = 100;
-			}
-			if (self.arena == 9)
-			{
-				//codam\utils::_debug("####### thread wawa_SpawnWeapons");
-				//thread wawa_SpawnWeapons();
 			}
 			spawnPlayer(arena-1);
 			hud_score_create_update();
