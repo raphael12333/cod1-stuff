@@ -1124,7 +1124,7 @@ arenaSelection()
 
 	while (true)
 	{
-		if (self useButtonPressed() && level.arenaFree[arena-1])
+		if (isDefined(self) && self useButtonPressed() && level.arenaFree[arena-1])
 		{
 			level.arenaFree[arena-1]--;
 
