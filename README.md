@@ -1,4 +1,4 @@
-### In this repository I plan to add all the Call of Duty source codes I write.
+### Here I plan to add all the stuff I do for Call of Duty.
 
 Credits:
 - wawa: https://github.com/v-cod/vPAM
