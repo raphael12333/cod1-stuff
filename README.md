@@ -1,4 +1,4 @@
-### Here I plan to add all the stuff I do for Call of Duty.
+### In this repo I plan to add all the stuff I do for Call of Duty.
 
 Credits:
 - wawa: https://github.com/v-cod/vPAM
