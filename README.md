@@ -1,4 +1,4 @@
-### In this repo I plan to add the stuff I do for Call of Duty.
+### In this repo I add the stuff I do for Call of Duty.
 Discord: raphael1233
 ___
 - rxt contains the Sensitivity ratio ADS feature for 1.5 patch.
