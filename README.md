@@ -1,7 +1,7 @@
 ### In this repo I add the stuff I do for Call of Duty.
 Discord: raphael1233
 ___
-- rxt contains the Sensitivity ratio ADS feature for 1.5 patch.
+- rxt contains the 1.1x Sensitivity ratio ADS feature for 1.5 patch.
 ___
 #### Credits:
 - wawa: https://github.com/v-cod/vPAM
