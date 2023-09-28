@@ -1,0 +1,9 @@
+/cod1/sd/codserver.log {
+	su codserver codserver
+	size 20M
+	rotate 3
+	compress
+	missingok
+	notifempty
+	copytruncate
+}
