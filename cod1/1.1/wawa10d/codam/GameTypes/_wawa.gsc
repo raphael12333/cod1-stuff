@@ -337,6 +337,11 @@ PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vP
 		eAttacker thread spawnProtectionEmblem();
 		return;
 	}
+
+	if (self.arena == 8 && sMeansOfDeath !="MOD_MELEE") //BASH ARENA
+	{
+		return;
+	}
 	self [[	level.gtd_call ]]( "finishPlayerDamage", eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc );
 }
 PlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, a7, a8, a9, b0, b1, b2, b3, b4, b5, b6, b7, b8, b9)
@@ -370,7 +375,10 @@ PlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLo
 
 			pistolkill = codam\utils::getVar("scr_mm", "pistolkill", "bool", 1|2, false);
 			//GIVE A NEW BULLET TO KILLER IF USED PISTOL 1SK
-			if (level.bulletreward && pistolkill && codam\_mm_mmm::isSecondaryWeapon(sWeapon))
+			if (level.bulletreward
+				&& pistolkill
+				&& codam\_mm_mmm::isSecondaryWeapon(sWeapon)
+				&& sMeansOfDeath !=	"MOD_MELEE")
 			{
 				attacker setWeaponSlotAmmo("pistol", 1);
 			}
@@ -564,7 +572,7 @@ spawnPlayer(arena, a1, a2, a3, a4, a5, a6, a7, a8, a9, b0, b1, b2, b3, b4, b5, b
 	if (self.arena == 9) //AW ARENA
 	{
 		//SELECTED FROM MENU
-		//Should disable instant kill if is this bolt weapon.
+		//TODO: give bolt rifle without instant kill.
 		_weap = self.pers[ "weapon" ];
 		__weap = self [[ level.gtd_call ]]( "assignWeaponSlot", "primary", _weap );
 		self setSpawnWeapon( __weap );
@@ -572,21 +580,17 @@ spawnPlayer(arena, a1, a2, a3, a4, a5, a6, a7, a8, a9, b0, b1, b2, b3, b4, b5, b
 
 		//GIVE A randomNonBoltRifle
 		nonBoltRifles = [];
+		//AUTO
 		nonBoltRifles[nonBoltRifles.size] = "mp44_mp";
 		nonBoltRifles[nonBoltRifles.size] = "bar_mp";
+		//SEMI-AUTO
 		nonBoltRifles[nonBoltRifles.size] = "m1carbine_mp";
-		nonBoltRifles[nonBoltRifles.size] = "ppsh_mp";
+		nonBoltRifles[nonBoltRifles.size] = "m1garand_mp";
 		randomNonBoltRifle = nonBoltRifles[randomInt(nonBoltRifles.size)];
 		self giveWeapon(randomNonBoltRifle);
  		self giveMaxAmmo(randomNonBoltRifle);
-		
-		//GIVE GRENADE RANDOMLY
-		if (randomInt(3) == 1)
-		{
-			self setWeaponSlotWeapon("grenade", "stielhandgranate_mp");
-			self setWeaponSlotClipAmmo("grenade", 1);
-		}
-		//Should also give a pistol without instant kill.
+
+		//TODO: give pistol without instant kill.
 	}
 	else
 	{
@@ -607,37 +611,18 @@ spawnPlayer(arena, a1, a2, a3, a4, a5, a6, a7, a8, a9, b0, b1, b2, b3, b4, b5, b
 		//PISTOL
 		if (self.arena == 8) //BASH ARENA
 		{
-			pistol = self [[ level.gtd_call ]]("assignWeapon", "colt_mp");
-			self [[ level.gtd_call ]]("assignWeaponSlot", "pistol", pistol, 0);
-			self setWeaponSlotClipAmmo("pistol", 0);
+			if (getCvar("scr_mm_allow_pistols") == "" || getCvarInt("scr_mm_allow_pistols") != 0) //MM AMMO NOT RESTRICTED
+			{
+				pistol = self [[ level.gtd_call ]]("assignWeapon", "colt_mp");
+				self [[ level.gtd_call ]]("assignWeaponSlot", "pistol", pistol, 0);
+				self setWeaponSlotClipAmmo("pistol", 0);
+			}
 		}
 		else
 		{
-			if (getCvar("scr_mm_allow_pistols") == "") //NOT USING MM CVAR
+			if (getCvar("scr_mm_allow_pistols") == "" || getCvarInt("scr_mm_allow_pistols") != 0) //MM AMMO NOT RESTRICTED
 			{
 				self [[ level.gtd_call ]]( "givePistol" );
-			}
-			else
-			{
-				if (getCvarInt("scr_mm_allow_pistols") > 0)
-				{
-					self [[ level.gtd_call ]]( "givePistol" );
-				}
-			}
-		}
-		//GRENADES
-		if (self.arena != 8) //BASH ARENA
-		{
-			if (getCvar("scr_mm_allow_grenades") == "") //NOT USING MM CVAR
-			{
-				self [[ level.gtd_call ]]( "giveGrenade", _weap );
-			}
-			else
-			{
-				if (getCvarInt("scr_mm_allow_grenades") > 0)
-				{
-					self [[ level.gtd_call ]]( "giveGrenade", _weap );
-				}
 			}
 		}
 	}
