@@ -9,3 +9,4 @@ ___
 - rxt: https://github.com/xtnded/codextended-client, https://github.com/callofduty4x/CoD4x_Client_pub
 - antiddos.sh: http://icculus.org/pipermail/cod/2012-March/016004.html
 - setperms.sh, startmyserver.sh: https://cod.pm/guide/a7a40b/call-of-duty-1-server-on-linux-installing-and-configuring
+- allmaps_mapvote.gsc: https://www.gamefront.com/games/call-of-duty-2/file/end-map-vote-standalone, https://github.com/cato-a/CoDaM_MiscMod/blob/main/___CoDaM_MiscMod/codam/_mm_mapvote.gsc
