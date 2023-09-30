@@ -1109,60 +1109,68 @@ arenaSelection()
 
 	while (true)
 	{
-		if (isDefined(self) && self useButtonPressed() && level.arenaFree[arena-1])
+		if (self useButtonPressed())
 		{
-			level.arenaFree[arena-1]--;
-
-			if (level.arenaFree[arena-1] < 0)
+			if (!isDefined(level.arenaFree[arena-1]))
 			{
-				codam\utils::_debug("####### arenaSelection: arenaFree is fewer than 0");
-				level.arenaFree[arena-1] = 0;
-			}
-			self.arena = arena-1;
-			self.choosingArena = false;
-			self.score = 0;
-			self.deaths = 0;
-
-			self [[ level.gtd_call ]]("allowSpectateTeam", "allies", true);
-			self [[ level.gtd_call ]]("allowSpectateTeam", "axis", true);
-			self [[ level.gtd_call ]]("allowSpectateTeam", "freelook", true);
-			self [[ level.gtd_call ]]("allowSpectateTeam", "none", true);
-
-			self.pers["savedmodel"] = undefined;
-			hud_select_destroy();
-
-			if (!isDefined(level.arenaPlayer[arena-1]))	//arena is empty
-			{
-				level.arenaPlayer[arena-1] = self;
-				iPrintLn(codam\_mm_mmm::namefix(self.name) + " ^7Entered arena ^1" + arena);
+				codam\utils::_debug("####### arenaSelection: !isDefined level.arenaFree[arena-1]");
+				continue;
 			}
 			else
 			{
-				//one player is in the arena
-				self.opponent = level.arenaPlayer[arena-1];
-				level.arenaPlayer[arena-1].opponent = self;
-				level.arenaPlayer[arena-1].score = 0;
-				level.arenaPlayer[arena-1].deaths = 0;
-				level.arenaPlayer[arena-1] iPrintLnBold(codam\_mm_mmm::namefix(self.name) + " ^7has entered your arena^1!");
-				self iPrintLnBold(codam\_mm_mmm::namefix(level.arenaPlayer[arena-1].name) + " ^7is your enemy^1!");
+				level.arenaFree[arena-1]--;
 
-				//delete bodies
-				size =  level.bodies[arena-1].size;
-				for (i = 0; i < size; i++)
+				if (level.arenaFree[arena-1] < 0)
 				{
-					if (isDefined(level.bodies[arena-1][i]))
-					{
-						level.bodies[arena-1][i] delete();
-						level.bodies[arena-1][i] = undefined;
-					}
+					codam\utils::_debug("####### arenaSelection: arenaFree is fewer than 0");
+					level.arenaFree[arena-1] = 0;
 				}
-				self.health = 100;
-				self.opponent.health = 100;
+				self.arena = arena-1;
+				self.choosingArena = false;
+				self.score = 0;
+				self.deaths = 0;
+
+				self [[ level.gtd_call ]]("allowSpectateTeam", "allies", true);
+				self [[ level.gtd_call ]]("allowSpectateTeam", "axis", true);
+				self [[ level.gtd_call ]]("allowSpectateTeam", "freelook", true);
+				self [[ level.gtd_call ]]("allowSpectateTeam", "none", true);
+
+				self.pers["savedmodel"] = undefined;
+				hud_select_destroy();
+
+				if (!isDefined(level.arenaPlayer[arena-1]))	//arena is empty
+				{
+					level.arenaPlayer[arena-1] = self;
+					iPrintLn(codam\_mm_mmm::namefix(self.name) + " ^7Entered arena ^1" + arena);
+				}
+				else
+				{
+					//one player is in the arena
+					self.opponent = level.arenaPlayer[arena-1];
+					level.arenaPlayer[arena-1].opponent = self;
+					level.arenaPlayer[arena-1].score = 0;
+					level.arenaPlayer[arena-1].deaths = 0;
+					level.arenaPlayer[arena-1] iPrintLnBold(codam\_mm_mmm::namefix(self.name) + " ^7has entered your arena^1!");
+					self iPrintLnBold(codam\_mm_mmm::namefix(level.arenaPlayer[arena-1].name) + " ^7is your enemy^1!");
+
+					//delete bodies
+					size =  level.bodies[arena-1].size;
+					for (i = 0; i < size; i++)
+					{
+						if (isDefined(level.bodies[arena-1][i]))
+						{
+							level.bodies[arena-1][i] delete();
+							level.bodies[arena-1][i] = undefined;
+						}
+					}
+					self.health = 100;
+					self.opponent.health = 100;
+				}
+				spawnPlayer(arena-1);
+				hud_score_create_update();
+				level updateArenaStatus(arena-1);
+				return;
 			}
-			spawnPlayer(arena-1);
-			hud_score_create_update();
-			level updateArenaStatus(arena-1);
-			return;
 		}
 
 		if (self attackButtonPressed())
