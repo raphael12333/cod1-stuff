@@ -22,6 +22,4 @@
 # 
 # m h  dom mon dow   command
 @reboot sh $HOME/antiddos.sh
-@reboot sh $HOME/startupwatcher.sh
 @reboot sh $HOME/startupsd.sh
-@reboot sh $HOME/startupwawa.sh
