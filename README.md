@@ -5,4 +5,4 @@ ___
 #### Credits:
 - wawa gt for 1.1: [vPAM](https://github.com/v-cod/vPAM), [MiscMod](https://github.com/cato-a/CoDaM_MiscMod)
 - antiddos.sh: [Some new cool iptables!](http://icculus.org/pipermail/cod/2012-March/016004.html)
-- setperms.sh, startmyserver.sh: [Call of Duty 1 server on Linux](https://cod.pm/guide/a7a40b/call-of-duty-1-server-on-linux-installing-and-configuring)
+- setperms.sh: [Call of Duty 1 server on Linux](https://cod.pm/guide/a7a40b/call-of-duty-1-server-on-linux-installing-and-configuring)
