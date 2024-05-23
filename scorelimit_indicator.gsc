@@ -34,13 +34,21 @@ indicateScoreLimit(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, b0, b1,	b2, b2,	b4, b
     {
         //printLn("##### scorelimitCvar = " + scorelimitCvar);
         
-        hudScoreLimit = newHudElem();
-        hudScoreLimit.x = 632;
-        hudScoreLimit.y = 56;
-        hudScoreLimit.alignX = "right";
-		hudScoreLimit.alignY = "middle";
-        hudScoreLimit.fontScale = 0.9;
-        hudScoreLimit.label = &"Score limit: ";
-        hudScoreLimit setValue(scorelimitCvar);
+        level.hudScoreLimit = newHudElem();
+        level.hudScoreLimit.x = 632;
+        level.hudScoreLimit.y = 56;
+        level.hudScoreLimit.alignX = "right";
+		level.hudScoreLimit.alignY = "middle";
+        level.hudScoreLimit.fontScale = 0.9;
+        level.hudScoreLimit.label = &"Score limit: ";
+        level.hudScoreLimit setValue(scorelimitCvar);
+
+        thread destroyScoreLimit();
     }
+}
+
+destroyScoreLimit()
+{
+    level waittill("intermission");
+    level.hudScoreLimit destroy();
 }
