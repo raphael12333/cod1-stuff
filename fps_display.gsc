@@ -41,12 +41,14 @@ displayPlayerFps(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, b0, b1,	b2, b2,	b4, b5,
     for(;;)
     {
         if(game["state"] == "intermission") {
-            self.hud_fps destroy();
+            if(isDefined(self.hud_fps))
+                self.hud_fps destroy();
             return;
         }
 
         fps = self getFPS();
-        self.hud_fps setValue(fps);
+        if(isDefined(self.hud_fps))
+            self.hud_fps setValue(fps);
         wait .05;
     }
 }
