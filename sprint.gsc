@@ -6,14 +6,27 @@ main(phase, register)
 {
 	switch(phase)
 	{
-		case "load": _load(); break;
+        case "init":
+            _init(register);
+        break;
+		case "load":
+            _load();
+        break;
 	}
+}
+_init(register)
+{
+    if(isDefined(level.sprint))
+		return;
+	level.sprint = true;
+
+    [[register]]("spawnPlayer", ::disableSprint, "thread");
 }
 _load()
 {
-	if(isDefined(level.sprint))
+	if(isDefined(level.sprint2))
 		return;
-	level.sprint = true;
+	level.sprint2 = true;
 
     commands(72, level.prefix + "sprint", ::cmd_sprint, "Toggle sprint. [" + level.prefix + "sprint]");
 }
@@ -35,14 +48,20 @@ cmd_sprint(args)
     }
 
     server_speed = getCvarInt("g_speed");
-    if(isDefined(self.sprinting))
-    {
-        self setSpeed(server_speed);
-        self.sprinting = undefined;
-    }
+
+    if(self.sprinting)
+        self disableSprint();
     else
-    {
-        self setSpeed(265);
-        self.sprinting = true;
-    }
+        self enableSprint();
+}
+disableSprint(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, b0, b1, b2, b3, b4, b5, b6, b7, b8, b9)
+{
+    server_speed = getCvarInt("g_speed");
+    self setSpeed(server_speed);
+    self.sprinting = false;
+}
+enableSprint()
+{
+    self setSpeed(260);
+    self.sprinting = true;
 }
