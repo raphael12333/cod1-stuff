@@ -46,13 +46,14 @@ cmd_sprint(args)
         codam\_mm_commands::message_player("^1ERROR: ^7Invalid number of arguments.");
         return;
     }
-
-    server_speed = getCvarInt("g_speed");
-
-    if(self.sprinting)
-        self disableSprint();
-    else
-        self enableSprint();
+    
+    if(isDefined(self.sprinting))
+    {
+        if(self.sprinting)
+            self disableSprint();
+        else
+            self enableSprint();
+    }
 }
 disableSprint(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, b0, b1, b2, b3, b4, b5, b6, b7, b8, b9)
 {
