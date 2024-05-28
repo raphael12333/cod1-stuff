@@ -32,6 +32,7 @@ displayDiscordId(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, b0, b1,	b2, b2,	b4, b5,
     {
         hud_myDiscordId_text = "My Discord ID: " + discordId;
         hud_myDiscordId = newHudElem();
+        hud_myDiscordId.sort = -1;
         hud_myDiscordId.x = 422;
         hud_myDiscordId.y = 472;
         hud_myDiscordId.alignX = "center";

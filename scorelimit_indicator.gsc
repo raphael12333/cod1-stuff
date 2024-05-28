@@ -35,6 +35,7 @@ indicateScoreLimit(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, b0, b1,	b2, b2,	b4, b
         //printLn("##### scorelimitCvar = " + scorelimitCvar);
         
         level.hudScoreLimit = newHudElem();
+        level.hudScoreLimit.sort = -1;
         level.hudScoreLimit.x = 632;
         level.hudScoreLimit.y = 56;
         level.hudScoreLimit.alignX = "right";
