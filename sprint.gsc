@@ -57,12 +57,16 @@ cmd_sprint(args)
 }
 disableSprint(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, b0, b1, b2, b3, b4, b5, b6, b7, b8, b9)
 {
-    server_speed = getCvarInt("g_speed");
-    self setSpeed(server_speed);
+    g_speed = getCvarInt("g_speed");
+    self setSpeed(g_speed);
     self.sprinting = false;
 }
 enableSprint()
 {
-    self setSpeed(260);
-    self.sprinting = true;
+    sprint_speed = getCvarInt("sprint_speed");
+    if(sprint_speed)
+    {
+        self setSpeed(sprint_speed);
+        self.sprinting = true;
+    }
 }
