@@ -50,9 +50,14 @@ cmd_sprint(args)
 {
     enableSprint = false;
     setAutoMode = false;
-
-    if(args.size == 2 && args[1] == "auto")
+    
+    if(args.size == 2)
     {
+        if(args[1] != "auto")
+        {
+            codam\_mm_commands::message_player("^1ERROR: ^7Invalid argument.");
+            return;
+        }
         setAutoMode = true;
     }
     else if(args.size != 1)
@@ -60,7 +65,7 @@ cmd_sprint(args)
         codam\_mm_commands::message_player("^1ERROR: ^7Invalid number of arguments.");
         return;
     }
-
+    
     if(!isDefined(self.pers["sprint"]))
         enableSprint = true;
     self toggleSprint(enableSprint, setAutoMode);
