@@ -6,19 +6,19 @@ main(phase, register)
 {
     //printLn("##### FPS Display/main");
 
-	switch(phase)
+    switch(phase)
     {
-		case "init": _init(register); break;
-	}
+        case "init": _init(register); break;
+    }
 }
 
 _init(register)
 {
     //printLn("##### FPS Display/_init");
 
-	if(isDefined(level.fpsdisplay))
-		return;
-	level.fpsdisplay = true;
+    if(isDefined(level.fpsdisplay))
+        return;
+    level.fpsdisplay = true;
 
     [[register]]("PlayerConnect", ::displayPlayerFps, "thread");
 }

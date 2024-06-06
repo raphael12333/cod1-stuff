@@ -6,19 +6,19 @@ main(phase, register)
 {
     //printLn("##### Score limit indicator/main");
 
-	switch(phase)
+    switch(phase)
     {
-		case "init": _init(register); break;
-	}
+        case "init": _init(register); break;
+    }
 }
 
 _init(register)
 {
     //printLn("##### Score limit indicator/_init");
 
-	if(isDefined(level.scorelimitindicator))
-		return;
-	level.scorelimitindicator = true;
+    if(isDefined(level.scorelimitindicator))
+        return;
+    level.scorelimitindicator = true;
 
     [[register]]("StartGameType", ::indicateScoreLimit, "thread");
 }
@@ -39,7 +39,7 @@ indicateScoreLimit(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, b0, b1,	b2, b2,	b4, b
         level.hudScoreLimit.x = 632;
         level.hudScoreLimit.y = 56;
         level.hudScoreLimit.alignX = "right";
-		level.hudScoreLimit.alignY = "middle";
+        level.hudScoreLimit.alignY = "middle";
         level.hudScoreLimit.fontScale = 0.9;
         level.hudScoreLimit.label = &"Score limit: ";
         level.hudScoreLimit setValue(scorelimitCvar);

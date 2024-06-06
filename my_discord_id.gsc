@@ -6,19 +6,19 @@ main(phase, register)
 {
     //printLn("##### My Discord ID/main");
 
-	switch(phase)
+    switch(phase)
     {
-		case "init": _init(register); break;
-	}
+        case "init": _init(register); break;
+    }
 }
 
 _init(register)
 {
     //printLn("##### My Discord ID/_init");
 
-	if(isDefined(level.my_discord_id))
-		return;
-	level.my_discord_id = true;
+    if(isDefined(level.my_discord_id))
+        return;
+    level.my_discord_id = true;
 
     [[register]]("StartGameType", ::displayDiscordId, "thread");
 }

@@ -9,19 +9,19 @@ main(phase, register)
 {
     printLn("##### Vote replay map other GT/main");
 
-	switch(phase) 
+    switch(phase) 
     {
-		case "init": _init(register); break;
-	}
+        case "init": _init(register); break;
+    }
 }
 
 _init(register)
 {
     printLn("##### Vote replay map other GT/_init");
 
-	if(isDefined(level.vote_replaymap_othergt))
-		return;
-	level.vote_replaymap_othergt = true;
+    if(isDefined(level.vote_replaymap_othergt))
+        return;
+    level.vote_replaymap_othergt = true;
 
     [[register]]("StartGameType", ::precacheModels, "thread");
 }
