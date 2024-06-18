@@ -10,7 +10,6 @@ main(phase, register)
         case "init": _init(register); break;
     }
 }
-
 _init(register)
 {
     //printLn("##### Last kill slow motion/_init");
@@ -19,14 +18,16 @@ _init(register)
     level.lastkill_slowmotion = true;
 
     [[register]]("StartGameType", ::initTimescale, "thread");
-    [[register]]("finishPlayerKilled", ::checkLastKill, "thread");
+
+    if(getCvar("g_gametype") == "sd")
+        [[register]]("finishPlayerKilled", ::checkLastKill, "thread");
 }
 
 initTimescale(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, b0, b1, b2, b2, b4, b5, b6, b7, b8, b9)
 {
+    // This is to prevent the timescale from getting stuck below 1.
     setCvar("timescale", "1");
 }
-
 checkLastKill(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, a7, a8, a9, b0, b1, b2, b3, b4, b5, b6, b7, b8, b9)
 {
     //printLn("##### Last kill slow motion/checkLastKill");
@@ -69,6 +70,8 @@ checkLastKill(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitL
             if((victimTeam == "allies" && game["axisscore"] == scorelimit -1)
                 || (victimTeam == "axis" && game["alliedscore"] == scorelimit -1))
             {
+                if(level.bombplanted && (victimTeam == game["attackers"]))
+                    return;
                 matchIsOver = true;
             }
 
