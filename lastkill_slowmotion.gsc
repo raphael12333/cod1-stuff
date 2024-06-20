@@ -77,16 +77,20 @@ checkLastKill(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitL
 
             if(!matchIsOver)
                 return;
-            
-            // Thanks to MiscMod for this code to change timescale smoothly.
-            setCvar("timescale", "0.5");
-            wait 0.25;
-            for(x = .5; x < 1; x+= .05)
-            {
-                wait (0.1 / x);
-                setCvar("timescale", x);
-            }
-            setCvar("timescale", "1");
+
+            level slowMotion();
         }
     }
+}
+slowMotion()
+{
+    // Thanks to MiscMod for this code to change timescale smoothly.
+    setCvar("timescale", "0.5");
+    wait 0.25;
+    for(x = .5; x < 1; x+= .05)
+    {
+        wait (0.1 / x);
+        setCvar("timescale", x);
+    }
+    setCvar("timescale", "1");
 }
