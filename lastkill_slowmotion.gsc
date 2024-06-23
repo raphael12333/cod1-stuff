@@ -66,16 +66,16 @@ checkLastKill(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitL
             if(!theTeamIsDead)
                 return;
             
-            matchIsOver = false;
+            level.matchIsOver = false;
             if((victimTeam == "allies" && game["axisscore"] == scorelimit -1)
                 || (victimTeam == "axis" && game["alliedscore"] == scorelimit -1))
             {
                 if(level.bombplanted && (victimTeam == game["attackers"]))
                     return;
-                matchIsOver = true;
+                level.matchIsOver = true;
             }
 
-            if(!matchIsOver)
+            if(!level.matchIsOver)
                 return;
 
             level slowMotion();
