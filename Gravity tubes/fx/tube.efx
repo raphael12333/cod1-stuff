@@ -1,0 +1,33 @@
+Cylinder
+{
+	name				tube
+
+	flags				useAlpha
+
+	life				1000
+
+	alpha
+	{
+		start			0.35
+	}
+
+	size
+	{
+		start			135
+	}
+
+	size2
+	{
+		start			135
+	}
+
+	length
+	{
+		start			2175
+	}
+
+	shaders
+	[
+		gfx/effects/tubecolor
+	]
+}
